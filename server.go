@@ -2,15 +2,24 @@ package main
 
 import(
 	"fmt"
-	"log"
-	"net/http")
+	"net/http"
+)
 
 
 func main(){	
-	fmt.Println("hello world!");
-	http.HandleFunc("/", callTest)
+	fmt.Println("Game server started...")
+
+	http.HandleFunc("/test", callTest)
+
+	http.HandleFunc("/", genericTest)
+
+	http.ListenAndServe(":3000", nil)
 }
 
-func callTest(w, http.ResonceWriter, r *http.Request){
-	fmt.println("callTest")	
+func callTest(w http.ResponseWriter, r *http.Request){
+	fmt.Println("callTest")	
+}
+
+func genericTest(w http.ResponseWriter, r *http.Request){
+	fmt.Println("generic Test")
 }
